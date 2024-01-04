@@ -27,6 +27,8 @@
 - Visual Studio Code
 
 # 開発環境
+- windows10 ver22H2(OSビルド 19045.3803)
+- Docker Ver4.26.1
 - PHP 8.2
 - Laravel Framework 10.38.2
 - MySQL Ver 8.0.32
@@ -114,6 +116,10 @@ https://okuyan-techdiary.com/mysql-dbeaver-error
 - データベースの正規化参考
 1. https://www.foresight.jp/fe/column/normalization/
 2. https://dev.mysql.com/doc/employee/en/sakila-structure.html
+- ログイン機能の実装
+1. Breeze公式リファレンス
+https://laravel.com/docs/8.x/starter-kits#laravel-breeze
+2. 
 
 
 
