@@ -25,6 +25,8 @@
 - Docker Ver4.26.1
 - GitHub
 - Visual Studio Code
+- laravel/breeze (v1.27.0)
+- 
 
 # 開発環境
 - windows10 ver22H2(OSビルド 19045.3803)
