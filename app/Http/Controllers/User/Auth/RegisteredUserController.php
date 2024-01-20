@@ -41,12 +41,13 @@ class RegisteredUserController extends Controller
             'nickname' => $request->nickname,
             'login_id' => $request->login_id,
             'password' => Hash::make($request->password),
+            'family_id' => $request->family_id,
         ]);
 
         event(new Registered($user));
 
         Auth::guard('user')->login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::USER_HOME);
     }
 }

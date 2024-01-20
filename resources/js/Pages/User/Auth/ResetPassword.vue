@@ -87,6 +87,7 @@ const submit = () => {
                     Reset Password
                 </PrimaryButton>
             </div>
+            
         </form>
     </GuestLayout>
 </template>
