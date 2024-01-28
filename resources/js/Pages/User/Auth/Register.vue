@@ -85,7 +85,7 @@ const submit = () => {
 
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
-            <input type="hidden" name="family_id" value="{{ $family_id }}">
+
             <div class="flex items-center justify-end mt-4">
                 <Link
                     :href="route('user.login')"
