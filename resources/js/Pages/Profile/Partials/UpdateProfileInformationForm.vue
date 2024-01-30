@@ -17,7 +17,11 @@ defineProps({
 const user = usePage().props.auth.user;
 
 const form = useForm({
+<<<<<<< HEAD
     family_name: user.family_name,
+=======
+    familu_name: user.family_name,
+>>>>>>> main
     email: user.email,
 });
 </script>
@@ -40,13 +44,21 @@ const form = useForm({
                     id="family_name"
                     type="text"
                     class="mt-1 block w-full"
+<<<<<<< HEAD
                     v-model="form.family_name"
+=======
+                    v-model="form.name"
+>>>>>>> main
                     required
                     autofocus
                     autocomplete="family_name"
                 />
 
+<<<<<<< HEAD
                 <InputError class="mt-2" :message="form.errors.family_name" />
+=======
+                <InputError class="mt-2" :message="form.errors.name" />
+>>>>>>> main
             </div>
 
             <div>

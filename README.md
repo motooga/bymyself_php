@@ -27,8 +27,11 @@
 - Visual Studio Code
 - laravel/breeze (v1.27.0)
 - Breeze
+<<<<<<< HEAD
 - vuex 4.0.2
 - axios 1.6.1
+=======
+>>>>>>> main
 
 # 開発環境
 - windows10 ver22H2(OSビルド 19045.3803)

@@ -11,8 +11,14 @@ use Laravel\Sanctum\HasApiTokens;
 class Family extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+<<<<<<< HEAD
     public function users() { 
         return $this->hasMany(User::class);
+=======
+    
+    public function family() {
+        return $this->belongsTo(Family::class);
+>>>>>>> main
     }
     /**
      * The attributes that are mass assignable.
@@ -20,9 +26,21 @@ class Family extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+<<<<<<< HEAD
         'family_name',
         'email',
         'password',
+=======
+<<<<<<<< HEAD:app/Models/User.php
+        'login_id',
+        'nickname',
+========
+        'family_name',
+        'email',
+>>>>>>>> main:app/Models/Family.php
+        'password',
+        'family_id'
+>>>>>>> main
     ];
 
     /**
@@ -44,6 +62,9 @@ class Family extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+<<<<<<< HEAD
 
     
+=======
+>>>>>>> main
 }

@@ -39,10 +39,16 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
+<<<<<<< HEAD
         $this->is('user/*') ? $guard = 'admin' : $guard = 'family';
 
         if (! Auth::guard($guard)->attempt($this->only('email', 'password'), 
             $this->boolean('remember'))) {
+=======
+        $this->ensureIsNotRateLimited();
+
+        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+>>>>>>> main
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

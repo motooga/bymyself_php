@@ -15,7 +15,11 @@ return [
 
     'defaults' => [
         'guard' => 'family',
+<<<<<<< HEAD
         'passwords' => 'families',
+=======
+        'passwords' => 'users',
+>>>>>>> main
     ],
 
     /*
@@ -37,13 +41,16 @@ return [
 
     'guards' => [
         'family' => [
+<<<<<<< HEAD
             'driver' => 'session',
             'provider' => 'family',
         ],
 
         'user' => [
+=======
+>>>>>>> main
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'family',
         ],
     ],
 
@@ -104,7 +111,11 @@ return [
         ],
 
         'users' => [
+<<<<<<< HEAD
             'provider' => 'user',
+=======
+            'provider' => 'family',
+>>>>>>> main
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
