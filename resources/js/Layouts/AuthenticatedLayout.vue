@@ -44,12 +44,8 @@ const showingNavigationDropdown = ref(false);
                                             <button
                                                 type="button"
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                            >
-<<<<<<< HEAD
+
                                                 {{ $page.props.auth.user.family_name }}
-=======
-                                                {{ $page.props.auth.user.name }}
->>>>>>> main
 
                                                 <svg
                                                     class="ms-2 -me-0.5 h-4 w-4"
@@ -72,10 +68,7 @@ const showingNavigationDropdown = ref(false);
                                         <DropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </DropdownLink>
-<<<<<<< HEAD
                                         <ResponsiveNavLink :href="route('user.register')">子アカウント登録</ResponsiveNavLink>
-=======
->>>>>>> main
                                     </template>
                                 </Dropdown>
                             </div>
@@ -129,11 +122,8 @@ const showingNavigationDropdown = ref(false);
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="px-4">
                             <div class="font-medium text-base text-gray-800">
-<<<<<<< HEAD
                                 {{ $page.props.auth.user.family_name }}
-=======
-                                {{ $page.props.auth.user.name }}
->>>>>>> main
+
                             </div>
                             <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
                         </div>
@@ -143,10 +133,8 @@ const showingNavigationDropdown = ref(false);
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
                                 Log Out
                             </ResponsiveNavLink>
-<<<<<<< HEAD
                             <ResponsiveNavLink :href="route('user.register')">子アカウント登録</ResponsiveNavLink>
-=======
->>>>>>> main
+
                         </div>
                     </div>
                 </div>
