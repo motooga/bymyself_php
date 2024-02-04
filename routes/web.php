@@ -41,6 +41,5 @@ Route::prefix('user')->name('user.')->group(function(){
     Route::get('/dashboard', function () {
         return Inertia::render('User/Dashboard');
     })->middleware(['auth:user', 'verified'])->name('dashboard');
-
     require __DIR__.'/user.php';
 });
