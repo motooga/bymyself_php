@@ -13,6 +13,7 @@ defineProps({
     },
     status: {
         type: String,
+        default: ""
     },
 });
 
@@ -45,10 +46,10 @@ const submit = () => {
                     id="login_id"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.email"
+                    v-model="form.login_id"
                     required
                     autofocus
-                    autocomplete="username"
+                    autocomplete="login_id"
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
