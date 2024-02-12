@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,9 +39,15 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::prefix('user')->name('user.')->group(function(){
+
     Route::get('/dashboard', function () {
         return Inertia::render('User/Dashboard');
     })->middleware(['auth:user', 'verified'])->name('dashboard');
 
+Route::middleware('auth:user')->group(function () {
+     Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
+     Route::patch('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+     Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
+    });
     require __DIR__.'/user.php';
 });

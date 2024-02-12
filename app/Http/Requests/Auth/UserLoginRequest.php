@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
-class LoginRequest extends FormRequest
+class UserLoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'login_id' => ['required', 'string'],
             'password' => ['required', 'string'],
          ];
     }
@@ -39,18 +39,12 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
-        $this->is('user/*') ? $guard = 'user' : $guard = 'family';
-
-        if (! Auth::guard($guard)->attempt($this->only('email', 'password'), 
-            $this->boolean('remember'))) {
+        if (!Auth::guard('user')->attempt($this->only('login_id', 'password'),
+        $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
-            
             throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
-            ]);
+            'login_id' => __('auth.failed')]);
         }
-
-        RateLimiter::clear($this->throttleKey());
     }
 
     /**
@@ -69,7 +63,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'login_id' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -81,6 +75,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->input('login_id')).'|'.$this->ip());
     }
 }
