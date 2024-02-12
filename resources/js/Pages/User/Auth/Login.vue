@@ -52,7 +52,7 @@ const submit = () => {
                     autocomplete="login_id"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-2" :message="form.errors.login_id" />
             </div>
 
             <div class="mt-4">

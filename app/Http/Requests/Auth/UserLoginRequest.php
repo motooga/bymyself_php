@@ -39,8 +39,11 @@ class UserLoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
-        if (!Auth::guard('user')->attempt($this->only('login_id', 'password'))) {
-            throw ValidationException::withMessages(['failed' => __('auth.failed')]);
+        if (!Auth::guard('user')->attempt($this->only('login_id', 'password'),
+        $this->boolean('remember'))) {
+            RateLimiter::hit($this->throttleKey());
+            throw ValidationException::withMessages([
+            'login_id' => __('auth.failed')]);
         }
     }
 
