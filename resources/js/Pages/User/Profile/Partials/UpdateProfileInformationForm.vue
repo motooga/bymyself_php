@@ -42,7 +42,7 @@ const form = useForm({
                     autocomplete="nickname"
                 />
 
-                <InputError class="mt-2" :message="form.errors.family_name" />
+                <InputError class="mt-2" :message="form.errors.nickname" />
             </div>
 
             <div>
