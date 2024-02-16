@@ -17,6 +17,8 @@ class UserProfileUpdateRequest extends FormRequest
     {
         return [
             'nickname' => ['required', 'string', 'max:255'],
+            'login_id' => ['required', 'string','alpha:ascii','max:15', Rule::unique(User::class)->ignore($this->user()->id)],
         ];
+        
     }
 }
