@@ -40,7 +40,7 @@ class UserProfileTest extends TestCase
         $user->refresh();
 
         $this->assertSame('Test User', $user->nickname);
-        $this->assertSame('test_com', $user->login_id);
+        $this->assertSame('test_id', $user->login_id);
 
     }
 
