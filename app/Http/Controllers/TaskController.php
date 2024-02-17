@@ -5,23 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
+use Inertia\Inertia;
+
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $tasks = Task::select('id' , 'name' , 'category' , 'type')
+        ->get();
+        
+        return Inertia::render('Tasks/Index',[
+            'tasks' => $tasks
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return Inertia::render('Tasks/Create');
     }
 
     /**

@@ -17,7 +17,7 @@ class FamilySeeder extends Seeder
         DB::table('families')->insert([
             [
               'family_name' => 'suzuki',
-              'email' => 'developer@gmail.com',
+              'email' => 'test@mail.com',
               'password' => Hash::make('password'),
             ],
           ]);
