@@ -1,5 +1,5 @@
 <template>
     <div>
-        <img src="/images/logo_set.png">
+        <img src="/images/ByMySelf_logo.png">
     </div>
 </template>
