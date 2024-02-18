@@ -153,6 +153,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'タスク名',
+        'category' => 'カテゴリー',
+        'type' => '頻度',
+    ],
 
 ];

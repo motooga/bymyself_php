@@ -26,12 +26,19 @@ class TaskController extends Controller
         return Inertia::render('Tasks/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreTaskRequest $request)
     {
-        //
+        Task::create([
+            'name' => $request ->name,
+            'category' => $request ->category,
+            'type' => $request ->type,
+        ]);
+
+        return to_route('tasks.index')
+        ->with([
+            'message' => '登録しました。',
+            'status' => 'success'
+        ]);
     }
 
     /**
