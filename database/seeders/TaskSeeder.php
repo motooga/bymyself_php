@@ -15,17 +15,17 @@ class TaskSeeder extends Seeder
     {
         DB::table('tasks')->insert([
             [
-              'name' => 'おつかい',
+              'task_name' => 'おつかい',
               'category' => 'おてつだい',
               'type' => 'よく頼む',
             ],
             [
-              'name' => 'おへやおそうじ',
+              'task_name' => 'おへやおそうじ',
               'category' => 'おてつだい',
               'type' => 'たまに頼む',
             ],
             [
-              'name' => 'おふろそうじ',
+              'task_name' => 'おふろそうじ',
               'category' => 'おてつだい',
               'type' => 'よく頼む',
             ],

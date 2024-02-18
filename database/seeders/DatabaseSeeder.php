@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             FamilySeeder::class,
             UserSeeder::class,
             TaskSeeder::class,
+            OrderSeeder::class,
+            ReportSeeder::class,
         ]);
     }
 }

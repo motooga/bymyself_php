@@ -13,7 +13,7 @@ class TaskController extends Controller
 
     public function index()
     {
-        $tasks = Task::select('id' , 'name' , 'category' , 'type')
+        $tasks = Task::select('id' , 'task_name' , 'category' , 'type')
         ->get();
         
         return Inertia::render('Tasks/Index',[
@@ -29,7 +29,7 @@ class TaskController extends Controller
     public function store(StoreTaskRequest $request)
     {
         Task::create([
-            'name' => $request ->name,
+            'task_name' => $request ->task_name,
             'category' => $request ->category,
             'type' => $request ->type,
         ]);

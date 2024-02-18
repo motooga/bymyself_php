@@ -41,7 +41,7 @@ defineProps({
                                 <tbody>
                                 <tr v-for="task in tasks" :key="task.id">
                                     <td class="border-b-2 border-gray-200 px-4 py-3">{{ task.id }}</td>
-                                    <td class="border-b-2 border-gray-200 px-4 py-3">{{ task.name }}</td>
+                                    <td class="border-b-2 border-gray-200 px-4 py-3">{{ task.task_name }}</td>
                                     <td class="border-b-2 border-gray-200 px-4 py-3">{{ task.category }}</td>
                                     <td class="border-b-2 border-gray-200 px-4 py-3">{{ task.type }}</td>
                                 </tr>

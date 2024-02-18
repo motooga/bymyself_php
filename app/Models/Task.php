@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'task_name',
         'category',
         'type',
     ];
+
 }
