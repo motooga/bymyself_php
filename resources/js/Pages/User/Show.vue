@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 
 defineProps({
   user: Object,
@@ -16,7 +16,7 @@ defineProps({
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">詳細</h2>
         </template>
-
+      
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -56,6 +56,7 @@ defineProps({
                                                 <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">仕事名</th>
                                                 <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">設定ポイント</th>
                                                 <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">開始日</th>
+                                                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">終了日</th>
                                                 <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">報告状況</th>
                                             </tr>
                                             </thead>
@@ -64,6 +65,7 @@ defineProps({
                                                 <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.task.task_name }}</td>
                                                 <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.set_point }}</td>
                                                 <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.start_date }}</td>
+                                                <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.end_date }}</td>
                                                 <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.type }}</td>
                                             </tr>
                                             </tbody>
@@ -73,7 +75,8 @@ defineProps({
                                 </div>
 
                                 <div class="p-2 w-full">
-                                  <button class="flex mx-auto text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">新規依頼</button>
+                                  
+                                  <Link as="button" :href="route('orders.create')" class="flex mx-auto text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">新規依頼</Link>
                                 </div>
                               </div>
                             </div>

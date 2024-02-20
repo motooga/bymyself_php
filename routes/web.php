@@ -4,14 +4,17 @@ use App\Http\Controllers\Auth\ManageUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User\Auth\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::resource('tasks', TaskController::class) 
-    ->middleware(['auth', 'verified']);
-    
+Route::resource('tasks', TaskController::class)
+        ->middleware(['auth', 'verified']);
+Route::resource('orders', OrderController::class)
+        ->middleware(['auth', 'verified']);
+
 
 
 /*

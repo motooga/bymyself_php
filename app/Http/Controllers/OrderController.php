@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use Inertia\Inertia;
 
 class OrderController extends Controller
 {
@@ -13,15 +14,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        // $orders = Order::select('id' , 'task_name' , 'category' , 'type')
+        // ->get();
+        
+        return Inertia::render('Orders/Index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return Inertia::render('Orders/Create');
     }
 
     /**
@@ -29,7 +30,17 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        Order::create([
+            'task_name' => $request ->task_name,
+            'category' => $request ->category,
+            'type' => $request ->type,
+        ]);
+
+        return to_route('user.show')
+        ->with([
+            'message' => '登録しました。',
+            'status' => 'success'
+        ]);
     }
 
     /**
