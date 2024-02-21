@@ -2,11 +2,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import { router , Head } from '@inertiajs/vue3';
-import { reactive } from 'vue'
+import { ref , reactive } from 'vue'
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
 
 defineProps({
   errors: Object,
-  tasks: Array
+  tasks: Array,
+  users: Array
 })
 
 const form = reactive({
@@ -15,9 +19,14 @@ const form = reactive({
     type: '',
 });
 
+const date = ref();
+
 const storeOrder = () => {
   router.post('/orders', form)
 };
+
+
+
 </script>
 
 <template>
@@ -34,7 +43,7 @@ const storeOrder = () => {
                     <div class="p-6 text-gray-900">
                       <section class="text-gray-600 body-font relative">
                         
-                        <form @submit.prevent="storeTask">
+                        <form @submit.prevent="storeOrder">
                           <div class="container px-5 py-8 mx-auto">
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
                               <div class="flex flex-wrap -m-2">
@@ -50,6 +59,18 @@ const storeOrder = () => {
                                      <InputError class="mt-2" :message="errors.task_id" />
                                   </div>
                                 </div>
+
+                                <div class="p-2 w-full">
+                                  <div class="relative">
+                                    <label for="nickname" class="leading-7 text-sm text-gray-600">こども</label>
+                                    <select v-model="selectValue" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <option v-for="user in users" :key="user.id" :value="user_id" >
+                                    {{ user.nickname }}
+                                    </option>
+                                    </select>
+                                     <InputError class="mt-2" :message="errors.user_id" />
+                                  </div>
+                                </div>
                                 
                                 <div class="p-2 w-full">
                                   <div class="relative">
@@ -61,9 +82,21 @@ const storeOrder = () => {
 
                                 <div class="p-2 w-full">
                                   <div class="relative">
-                                    <label for="type" class="leading-7 text-sm text-gray-600">依頼頻度</label>
-                                    <input type="text" id="type" name="type" v-model="form.type" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <InputError class="mt-2" :message="errors.type" />
+                                    <label for="type" class="leading-7 text-sm text-gray-600">開始日</label>
+                                    <VueDatePicker v-model="start_date" name="start_date" format="yyyy/MM/dd" model-type="yyyy-MM-dd" :enable-time-picker="false"  :teleport="true" locale="jp" auto-apply>
+                                        {{ start_date }}
+                                    </VueDatePicker>
+                                    <InputError class="mt-2" :message="errors.start_date" />
+                                  </div>
+                                </div>
+
+                                <div class="p-2 w-full">
+                                  <div class="relative">
+                                    <label for="type" class="leading-7 text-sm text-gray-600">終了日</label>
+                                    <VueDatePicker v-model="end_date" name="end_date" format="yyyy/MM/dd" model-type="yyyy-MM-dd" :enable-time-picker="false"  :teleport="true" locale="jp" auto-apply>
+                                        {{ end_date }}
+                                    </VueDatePicker>
+                                    <InputError class="mt-2" :message="errors.start_date" />
                                   </div>
                                 </div>
 

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
 use App\Models\Task;
+use App\Models\User;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -24,9 +25,13 @@ class OrderController extends Controller
     public function create()
     {
         $tasks = Task::select('id' , 'task_name')
-        ->get();
+            ->get();
+        $users = User::select('id' , 'nickname')
+            ->get();
         return Inertia::render('Orders/Create',[
-        'tasks' => $tasks]);
+        'tasks' => $tasks,
+        'users' => $users
+        ]);
     }
 
     /**
