@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use App\Models\Task;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -22,7 +23,10 @@ class OrderController extends Controller
 
     public function create()
     {
-        return Inertia::render('Orders/Create');
+        $tasks = Task::select('id' , 'task_name')
+        ->get();
+        return Inertia::render('Orders/Create',[
+        'tasks' => $tasks]);
     }
 
     /**
@@ -30,6 +34,7 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
+
         Order::create([
             'task_name' => $request ->task_name,
             'category' => $request ->category,
