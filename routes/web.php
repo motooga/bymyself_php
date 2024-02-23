@@ -1,10 +1,21 @@
 <?php
 
+use App\Http\Controllers\Auth\ManageUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\User\Auth\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+Route::resource('tasks', TaskController::class)
+        ->middleware(['auth', 'verified']);
+Route::resource('orders', OrderController::class)
+        ->middleware(['auth', 'verified']);
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/index', [ManageUserController::class, 'index'])->name('index');
 });
 
 require __DIR__.'/auth.php';
@@ -44,10 +56,12 @@ Route::prefix('user')->name('user.')->group(function(){
         return Inertia::render('User/Dashboard');
     })->middleware(['auth:user', 'verified'])->name('dashboard');
 
-Route::middleware('auth:user')->group(function () {
-     Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
-     Route::patch('/profile', [UserProfileController::class, 'update'])->name('profile.update');
-     Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::middleware('auth:user')->group(function () {
+      Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
+      Route::patch('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+      Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
     });
     require __DIR__.'/user.php';
 });
+
+Route::get('user/show/{user}', [UserController::class, 'show'])->name('user.show');

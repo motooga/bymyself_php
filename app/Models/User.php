@@ -15,6 +15,10 @@ class User extends Authenticatable
     public function family() {
         return $this->belongsTo(Family::class);
     }
+
+    public function oder_tasks() {
+        return $this->hasMany(OrderTasks::class);
+    }
     /*** The attributes that are mass assignable.
      *
      * @var array<int, string>

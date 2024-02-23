@@ -21,6 +21,18 @@ class UserSeeder extends Seeder
               'password' => Hash::make('password'),
               'family_id' => 1
             ],
+            [
+              'nickname' => '二太郎',
+              'login_id' => 'taro2',
+              'password' => Hash::make('password'),
+              'family_id' => 1
+            ],
+            [
+              'nickname' => 'さん太郎',
+              'login_id' => 'taro3',
+              'password' => Hash::make('password'),
+              'family_id' => 1
+            ],
           ]);
     }
 }
