@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\Family;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -39,14 +41,18 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
+        $loggedInFamily = Auth::user();
 
         Order::create([
-            'task_name' => $request ->task_name,
-            'category' => $request ->category,
-            'type' => $request ->type,
+            'task_id' => $request ->task_id,
+            'user_id' => $request ->user_id,
+            'set_point' => $request ->set_point,
+            'start_date' => $request ->start_date,
+            'end_date' => $request ->end_date,
+            'family_id' => $loggedInFamily->id,
         ]);
 
-        return to_route('user.show')
+        return to_route('user.show',['user'=> $request -> user_id ])
         ->with([
             'message' => '登録しました。',
             'status' => 'success'

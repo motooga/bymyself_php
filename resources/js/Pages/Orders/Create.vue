@@ -14,12 +14,13 @@ defineProps({
 })
 
 const form = reactive({
-    task_name: '',
-    category: '',
-    type: '',
+    task_id: '',
+    user_id: '',
+    start_date : '',
+    end_date :  '',
 });
 
-const date = ref();
+
 
 const storeOrder = () => {
   router.post('/orders', form)
@@ -50,10 +51,11 @@ const storeOrder = () => {
 
                                 <div class="p-2 w-full">
                                   <div class="relative">
-                                    <label for="category" class="leading-7 text-sm text-gray-600">依頼タスクの選択</label>
-                                    <select v-model="selectValue" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <option v-for="task in tasks" :key="task.id" :value="task_id" >
-                                    {{ task.task_name }}
+                                    <label for="task_name" class="leading-7 text-sm text-gray-600">依頼タスクの選択</label>
+                                    <select v-model="form.task_id" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <option disabled value="">タスクを選択してください</option>
+                                    <option v-for="task in tasks" :key="task.id" :value="task.id" >
+                                      {{ task.task_name }}
                                     </option>
                                     </select>
                                      <InputError class="mt-2" :message="errors.task_id" />
@@ -63,8 +65,9 @@ const storeOrder = () => {
                                 <div class="p-2 w-full">
                                   <div class="relative">
                                     <label for="nickname" class="leading-7 text-sm text-gray-600">こども</label>
-                                    <select v-model="selectValue" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <option v-for="user in users" :key="user.id" :value="user_id" >
+                                    <select v-model="form.user_id" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <option disabled value="">こどもを選択してください</option>
+                                    <option v-for="user in users" :key="user.id" :value="user.id" >
                                     {{ user.nickname }}
                                     </option>
                                     </select>
@@ -75,7 +78,7 @@ const storeOrder = () => {
                                 <div class="p-2 w-full">
                                   <div class="relative">
                                     <label for="category" class="leading-7 text-sm text-gray-600">設定ポイント</label>
-                                    <input type="text" id="category" name="set_point" v-model="form.set_point" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <input type="number" id="set_point" name="set_point" v-model.number="form.set_point" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                     <InputError class="mt-2" :message="errors.set_point" />
                                   </div>
                                 </div>
@@ -83,7 +86,7 @@ const storeOrder = () => {
                                 <div class="p-2 w-full">
                                   <div class="relative">
                                     <label for="type" class="leading-7 text-sm text-gray-600">開始日</label>
-                                    <VueDatePicker v-model="start_date" name="start_date" format="yyyy/MM/dd" model-type="yyyy-MM-dd" :enable-time-picker="false"  :teleport="true" locale="jp" auto-apply>
+                                    <VueDatePicker v-model="form.start_date" name="start_date" format="yyyy/MM/dd" model-type="yyyy-MM-dd" :enable-time-picker="false"  :teleport="true" locale="jp" auto-apply>
                                         {{ start_date }}
                                     </VueDatePicker>
                                     <InputError class="mt-2" :message="errors.start_date" />
@@ -93,10 +96,10 @@ const storeOrder = () => {
                                 <div class="p-2 w-full">
                                   <div class="relative">
                                     <label for="type" class="leading-7 text-sm text-gray-600">終了日</label>
-                                    <VueDatePicker v-model="end_date" name="end_date" format="yyyy/MM/dd" model-type="yyyy-MM-dd" :enable-time-picker="false"  :teleport="true" locale="jp" auto-apply>
+                                    <VueDatePicker v-model="form.end_date" name="end_date" format="yyyy/MM/dd" model-type="yyyy-MM-dd" :enable-time-picker="false"  :teleport="true" locale="jp" auto-apply>
                                         {{ end_date }}
                                     </VueDatePicker>
-                                    <InputError class="mt-2" :message="errors.start_date" />
+                                    <InputError class="mt-2" :message="errors.end_date" />
                                   </div>
                                 </div>
 

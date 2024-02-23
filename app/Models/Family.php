@@ -16,7 +16,7 @@ class Family extends Authenticatable
     }
 
     public function oder_tasks() {
-        return $this->hasMany(OrderTasks::class);
+        return $this->hasMany(Order::class);
     }
     /**
      * The attributes that are mass assignable.

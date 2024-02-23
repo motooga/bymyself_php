@@ -17,4 +17,13 @@ class Order extends Model
     public function task() {
         return $this->belongsTo(Task::class);
     }
+
+    protected $fillable = [
+        'task_id',
+        'user_id',
+        'set_point',
+        'start_date',
+        'end_date',
+    ];
+
 }

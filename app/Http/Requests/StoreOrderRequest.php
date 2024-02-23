@@ -11,7 +11,7 @@ class StoreOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
+            'task_id' => ['required'],
+            'user_id' =>  ['required'],
+            'set_point' =>  ['required'],
+            'start_date' =>  ['required'],
+            'end_date' =>  ['required'],
+            
         ];
     }
 }
