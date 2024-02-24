@@ -38,12 +38,12 @@ defineProps({
                                       <tbody>
                                       <tr v-for="user in users" :key="user.id">
                                           <td class="border-b-2 border-gray-200 px-4 py-3">
-                                            <Link class="text-blue-400" :href="route('user.show', { user : user.id })">
+                                            <Link class="text-blue-400" :href="route('show', { user : user.id })">
                                               {{ user.id }}
                                           </Link>
                                           </td>
                                           <td class="border-b-2 border-gray-200 px-4 py-3">
-                                            <Link class="text-blue-400" :href="route('user.show', { user : user.id })">
+                                            <Link class="text-blue-400" :href="route('show', { user : user.id })">
                                             {{ user.nickname }}
                                             </Link>
                                           </td>
