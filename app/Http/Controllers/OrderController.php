@@ -22,6 +22,7 @@ class OrderController extends Controller
         // ->get();
         
         return Inertia::render('Orders/Index');
+
     }
 
     public function create()
@@ -52,7 +53,7 @@ class OrderController extends Controller
             'family_id' => $loggedInFamily->id,
         ]);
 
-        return to_route('user.show',['user'=> $request -> user_id ])
+        return to_route('show',['user'=> $request -> user_id ])
         ->with([
             'message' => '登録しました。',
             'status' => 'success'

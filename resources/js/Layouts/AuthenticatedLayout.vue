@@ -38,7 +38,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('tasks.index')" :active="route().current('tasks.index')">
                                     おしごと管理
                                 </NavLink>
-                                <NavLink :href="route('orders.index')" :active="route().current('tasks.index')">
+                                <NavLink :href="route('orders.index')" :active="route().current('orders.index')">
                                     依頼管理
                                 </NavLink>
                             </div>

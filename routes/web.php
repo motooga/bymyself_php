@@ -46,15 +46,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/index', [ManageUserController::class, 'index'])->name('index');
+    Route::get('/show/{user}', [ManageUserController::class, 'show'])->name('show');
 });
 
 require __DIR__.'/auth.php';
 
 Route::prefix('user')->name('user.')->group(function(){
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('User/Dashboard');
-    })->middleware(['auth:user', 'verified'])->name('dashboard');
+    Route::get('/dashboard',  [UserController::class, 'show'] )
+    ->middleware(['auth:user', 'verified'])->name('dashboard');
 
     Route::middleware('auth:user')->group(function () {
       Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
@@ -64,4 +64,4 @@ Route::prefix('user')->name('user.')->group(function(){
     require __DIR__.'/user.php';
 });
 
-Route::get('user/show/{user}', [UserController::class, 'show'])->name('user.show');
+

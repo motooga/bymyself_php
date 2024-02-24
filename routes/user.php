@@ -9,6 +9,7 @@ use App\Http\Controllers\User\Auth\PasswordController;
 use App\Http\Controllers\User\Auth\PasswordResetLinkController;
 use App\Http\Controllers\User\Auth\RegisteredUserController;
 use App\Http\Controllers\User\Auth\VerifyEmailController;
+use App\Http\Controllers\User\Auth\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:user')->group(function () {
