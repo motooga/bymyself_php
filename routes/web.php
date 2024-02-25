@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\User\Auth\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -14,8 +15,8 @@ Route::resource('tasks', TaskController::class)
         ->middleware(['auth', 'verified']);
 Route::resource('orders', OrderController::class)
         ->middleware(['auth', 'verified']);
-
-
+Route::resource('/order/{order}/report', ReportController::class)
+        ->middleware(['auth:user']);
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,7 @@ Route::prefix('user')->name('user.')->group(function(){
       Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
       Route::patch('/profile', [UserProfileController::class, 'update'])->name('profile.update');
       Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
+
     });
     require __DIR__.'/user.php';
 });

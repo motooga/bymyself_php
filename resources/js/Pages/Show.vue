@@ -23,7 +23,7 @@ defineProps({
                     <div class="p-6 text-gray-900">
                       <section class="text-gray-600 body-font relative">
                         
-                        <form @submit.prevent="storeTask">
+
                           <div class="container px-5 py-8 mx-auto">
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
                               <div class="flex flex-wrap -m-2">
@@ -81,7 +81,7 @@ defineProps({
                               </div>
                             </div>
                           </div>
-                        </form>
+
                       </section>
                     </div>
                 </div>

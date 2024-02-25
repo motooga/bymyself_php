@@ -36,7 +36,11 @@ defineProps({
                                   </thead>
                                   <tbody>
                                   <tr v-for="order in orders" :key="order.id">
-                                      <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.task.task_name }}</td>
+                                      <td class="border-b-2 border-gray-200 px-4 py-3">
+                                        <Link class="text-blue-400" :href="route('report.create', { order : order.id })">
+                                            {{ order.task.task_name }}
+                                        </Link>
+                                      </td>
                                       <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.set_point }}</td>
                                       <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.start_date }}</td>
                                       <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.end_date }}</td>

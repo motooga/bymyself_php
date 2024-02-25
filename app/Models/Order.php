@@ -15,7 +15,10 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
     public function task() {
-        return $this->belongsTo(Task::class);
+        return $this->belongsTo(Task::class, 'task_id');
+    }
+    public function report() {
+        return $this->hasMany(Report::class);
     }
 
     protected $fillable = [

@@ -122,11 +122,11 @@
 
 # データベース設計
 
-[![Image from Gyazo](https://i.gyazo.com/5453713697a89aedbfaac63cd4824c48.png)](https://gyazo.com/5453713697a89aedbfaac63cd4824c48)
+[![Image from Gyazo](https://i.gyazo.com/53a31881a6ee8d944fe3706fce61fd8d.png)](https://gyazo.com/53a31881a6ee8d944fe3706fce61fd8d)
 
 # 画面遷移図
 
-[![Image from Gyazo](https://i.gyazo.com/fe562f71d764b8f004d2cfdbc4625c77.png)](https://gyazo.com/fe562f71d764b8f004d2cfdbc4625c77)
+[![Image from Gyazo](https://i.gyazo.com/eff1d8fecdd8511c38f7473c3ab68586.jpg)](https://gyazo.com/eff1d8fecdd8511c38f7473c3ab68586)
 
 # 参考資料又はサイト
 # 参考サイト
