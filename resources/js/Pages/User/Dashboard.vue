@@ -4,6 +4,7 @@ import { Head, Link } from '@inertiajs/vue3';
 
 defineProps({
   orders: Array,
+  message: Array,
 })
 </script>
 

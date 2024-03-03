@@ -3,21 +3,35 @@ import UserAuthenticatedLayout from '@/Layouts/UserAuthenticatedLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import { router , Head } from '@inertiajs/vue3';
 import { reactive } from 'vue'
+import axios from 'axios';
 
 const props = defineProps({
   errors: Object,
   order: Object
-})
+});
+
 const form = reactive({
+    memo: null,
+    image: null,
+});
 
-    image: '',
-    memo: '',
+// const StoreReportRequest = ({ orderId }) => {
 
+const StoreReportRequest = async ({ orderId }) => {
+    try {
+        const formData = new FormData();
+        formData.append('memo', form.memo);
+        formData.append('image', form.image);
+        formData.append('order_id', orderId);
+        formData.append('is_done', 1);
 
-  });
-
-const StoreReportRequest = ({ orderId }) => {
-    router.post(route('order.reports.store', { order: orderId , order_id: orderId , is_done: 1 },form));
+        const response = await router.post(route('order.reports.store', { order: orderId }), formData);
+        
+        // 成功時の処理を追加
+    } catch (error) {
+        console.error('Error:', error);
+        // エラー時の処理を追加
+    }
 };
 
 

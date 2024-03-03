@@ -12,7 +12,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 use App\Models\Task;
 use Inertia\Inertia;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
 {
@@ -48,19 +48,33 @@ class ReportController extends Controller
     public function store(StoreReportRequest $request, $orderId)
     {
         $is_done = 1;
-        $memo = $request -> input('memo');
-        $image = $request -> file('image');
 
-        Report::create([
+        $memo = $request->input('memo');
+
+        $path = $request->file('image')->store(
+    'reports/'.$request->user()->id, 's3'
+);
+
+        if (!$path) {
+
+            return back()->withErrors(['error' => 'ファイルの保存に失敗しました。']);
+        }
+        $reportphoto_url = Storage::disk('s3')->url($path);
+
+        $report = new Report([
             'order_id' => $orderId,
             'memo' => $memo,
             'is_done' => $is_done,
+            'reportphoto_url' => $reportphoto_url
         ]);
-    return to_route('user.dashboard')
-    ->with([
-        'message' => '登録しました。',
-        'status' => 'success'
-    ]);
+
+        
+        $report->save();
+    
+        return redirect()->intended(route('user.dashboard'))->with([
+            'message' => '登録しました。',
+            'status' => 'success'
+        ]);
 
 
 }

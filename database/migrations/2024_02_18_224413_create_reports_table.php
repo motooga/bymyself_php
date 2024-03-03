@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->integer('is_done');
-            $table->integer('reportphoto_url')->nullable();
+            $table->string('reportphoto_url')->nullable();
             $table->text('memo')->nullable();
             $table->timestamps();
 
