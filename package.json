@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@vuepic/vue-datepicker": "^8.1.1",
+        "vue-router": "^4.3.0",
         "vuex": "^4.0.2"
     }
 }

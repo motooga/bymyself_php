@@ -13,6 +13,8 @@ class Report extends Model
     }
     use HasFactory;
 
+
+
     protected $fillable = [
         'order_id',
         'reportphoto_url',

@@ -26,7 +26,7 @@ class ManageUserController extends Controller
 
         $orders = Order::where('user_id', $user->id)->with('task')->get();
 
-         return Inertia::render('User/Show', [
+         return Inertia::render('Show', [
              'user' => $user,
              'orders' => $orders,
         ]);

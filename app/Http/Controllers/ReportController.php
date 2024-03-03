@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades\DB;
 use App\Providers\RouteServiceProvider;
 use App\Http\Requests\StoreReportRequest;
 use App\Http\Requests\UpdateReportRequest;
 use App\Models\Report;
 use App\Models\Order;
+use Illuminate\Support\Facades\Log;
 use App\Models\Task;
 use Inertia\Inertia;
+use Storage;
 
 class ReportController extends Controller
 {
@@ -27,66 +30,39 @@ class ReportController extends Controller
     public function create($order)
     {
         $order = Order::with('task')->find($order);
-    
+
         if (!$order) {
             abort(404);
         }
     
-        return Inertia::render('Report/Create', [
+        return Inertia::render('Reports/Create', [
             'order' => $order,
         ]);
+
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreReportRequest $request, $order)
-{
-    $is_done = 1;
-    $reportphoto_url = $request->file('reportphoto_url');
+    public function store(StoreReportRequest $request, $orderId)
+    {
+        $is_done = 1;
+        $memo = $request -> input('memo');
+        $image = $request -> file('image');
 
-    try {
-
-        $this->validate($request, [
-            'reportphoto_url' => [
-                'required',
-                'image', // 画像であることを検証
-                'mimes:jpeg,png,jpg,gif', // 許可する拡張子
-                'max:2048', // ファイルサイズの上限（2MB）
-            ],
+        Report::create([
+            'order_id' => $orderId,
+            'memo' => $memo,
+            'is_done' => $is_done,
         ]);
-    
-
-        DB::beginTransaction();
-
-        $path = null;
-        if ($request->hasFile('reportphoto_url')) {
-            $path = $request->file('reportphoto_url')->store('reportphoto_url');
-
-            Report::create([
-                'order_id' => $order,
-                'memo' => $request->memo,
-                'reportphoto_url' => $path,
-                'is_done' => $is_done,
-            ]);
-        }
+    return to_route('user.dashboard')
+    ->with([
+        'message' => '登録しました。',
+        'status' => 'success'
+    ]);
 
 
-        DB::commit();
-
-        return redirect()->intended(RouteServiceProvider::USER_HOME)
-            ->with([
-                'message' => '登録しました。',
-                'status' => 'success'
-            ]);
-
-    } catch (\Exception $e) {
-
-        DB::rollBack();
-
-
-        return back()->withInput()->withErrors(['error' => '登録に失敗しました。']);
-    }
 }
     /**
      * Display the specified resource.

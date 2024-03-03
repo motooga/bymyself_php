@@ -15,9 +15,13 @@ Route::resource('tasks', TaskController::class)
         ->middleware(['auth', 'verified']);
 Route::resource('orders', OrderController::class)
         ->middleware(['auth', 'verified']);
-Route::resource('/order/{order}/report', ReportController::class)
-        ->middleware(['auth:user']);
 
+Route::post('/order/{order}/reports', [ReportController::class, 'store'])
+        ->middleware(['auth:user'])
+        ->name('order.reports.store');
+Route::get('/order/{order}/reports/create', [ReportController::class ,'create'])
+        ->middleware(['auth:user'])
+        ->name('order.reports.create');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
