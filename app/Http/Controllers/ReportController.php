@@ -25,7 +25,7 @@ class ReportController extends Controller
     {
        
         $user_id = Auth::user()->id;
-        $reports = Report::where('user_id' , $user_id )
+        $reports = Report::where('user_id'  )
         ->with(['order.task'])
         ->get();
 
@@ -102,7 +102,11 @@ class ReportController extends Controller
      */
     public function show(Report $report)
     {
-        //
+        $report->load('order.task');
+
+        return Inertia::render('Reports/Show', [
+            'report' => $report
+        ]);
     }
 
     /**
