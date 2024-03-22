@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('is_done');
             $table->string('reportphoto_url')->nullable();
             $table->text('memo')->nullable();
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }

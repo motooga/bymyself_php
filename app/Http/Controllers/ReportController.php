@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\DB;
 use App\Providers\RouteServiceProvider;
 use App\Http\Requests\StoreReportRequest;
 use App\Http\Requests\UpdateReportRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Report;
 use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 use App\Models\Task;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
+
 
 class ReportController extends Controller
 {
@@ -21,7 +23,16 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+       
+        $user_id = Auth::user()->id;
+        $reports = Report::where('user_id' , $user_id )
+        ->with(['order.task'])
+        ->get();
+
+      
+        return Inertia::render('Reports/Index' ,[
+         'reports' => $reports
+        ]);
     }
 
     /**
@@ -48,12 +59,21 @@ class ReportController extends Controller
     public function store(StoreReportRequest $request, $orderId)
     {
         $is_done = 1;
+        $user_id = Auth::user()->id;
 
         $memo = $request->input('memo');
-
-        $path = $request->file('image')->store(
-    'reports/'.$request->user()->id, 's3'
-);
+        if (!$request -> image) {
+            Report::create([
+                'order_id' => $orderId,
+                'user_id' => $user_id,
+                'memo' => $memo,
+                'is_done' => $is_done,
+            ]);
+           
+        }
+        else{$path = $request->file('image')->store(
+                'reports/'.$request->user()->id, 's3'
+                );
 
         if (!$path) {
 
@@ -63,6 +83,7 @@ class ReportController extends Controller
 
         $report = new Report([
             'order_id' => $orderId,
+            'user_id' => $user_id,
             'memo' => $memo,
             'is_done' => $is_done,
             'reportphoto_url' => $reportphoto_url
@@ -70,11 +91,9 @@ class ReportController extends Controller
 
         
         $report->save();
+        }
     
-        return redirect()->intended(route('user.dashboard'))->with([
-            'message' => '登録しました。',
-            'status' => 'success'
-        ]);
+        return to_route('user.dashboard');
 
 
 }

@@ -32,7 +32,6 @@ defineProps({
                                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">ポイント</th>
                                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">開始日</th>
                                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">終了日</th>
-                                      <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">報告状況</th>
                                   </tr>
                                   </thead>
                                   <tbody>
@@ -45,7 +44,6 @@ defineProps({
                                       <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.set_point }}</td>
                                       <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.start_date }}</td>
                                       <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.end_date }}</td>
-                                      <td class="border-b-2 border-gray-200 px-4 py-3">{{ order.type }}</td>
                                   </tr>
                                   </tbody>
                               </table>

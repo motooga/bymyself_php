@@ -11,36 +11,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::resource('tasks', TaskController::class)
-        ->middleware(['auth', 'verified']);
-Route::resource('orders', OrderController::class)
-        ->middleware(['auth', 'verified']);
-
-Route::post('/order/{order}/reports', [ReportController::class, 'store'])
-        ->middleware(['auth:user'])
-        ->name('order.reports.store');
-Route::get('/order/{order}/reports/create', [ReportController::class ,'create'])
-        ->middleware(['auth:user'])
-        ->name('order.reports.create');
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -53,6 +23,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/index', [ManageUserController::class, 'index'])->name('index');
     Route::get('/show/{user}', [ManageUserController::class, 'show'])->name('show');
 });
+
+
+Route::resource('tasks', TaskController::class)
+        ->middleware(['auth', 'verified']);
+Route::resource('orders', OrderController::class)
+        ->middleware(['auth', 'verified']);
+
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
 
 require __DIR__.'/auth.php';
 
@@ -67,7 +53,19 @@ Route::prefix('user')->name('user.')->group(function(){
       Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
 
     });
+
     require __DIR__.'/user.php';
 });
 
-
+Route::post('/order/{order}/reports', [ReportController::class, 'store'])
+        ->middleware(['auth:user'])
+        ->name('order.reports.store');
+Route::get('/order/{order}/reports/create', [ReportController::class ,'create'])
+        ->middleware(['auth:user'])
+        ->name('order.reports.create');
+Route::get('/reports/index', [ReportController::class ,'index'])
+        ->middleware(['auth:user'])
+        ->name('reports.index');
+Route::get('/reports/show/{report}', [ReportController::class ,'show'])
+        ->middleware(['auth:user'])
+        ->name('reports.show');
