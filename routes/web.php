@@ -69,3 +69,12 @@ Route::get('/reports/index', [ReportController::class ,'index'])
 Route::get('/reports/show/{report}', [ReportController::class ,'show'])
         ->middleware(['auth:user'])
         ->name('reports.show');
+Route::delete('/reports/show/{report}', [ReportController::class ,'destroy'])
+        ->middleware(['auth:user'])
+        ->name('reports.destroy');
+Route::get('/order/{order}/reports}', [ReportController::class ,'edit'])
+        ->middleware(['auth:user'])
+        ->name('reports.edit');
+Route::patch('/order/{order}/reports}', [ReportController::class ,'update'])
+        ->middleware(['auth:user'])
+        ->name('reports.update');
