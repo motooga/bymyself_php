@@ -72,9 +72,9 @@ Route::get('/reports/show/{report}', [ReportController::class ,'show'])
 Route::delete('/reports/show/{report}', [ReportController::class ,'destroy'])
         ->middleware(['auth:user'])
         ->name('reports.destroy');
-Route::get('/order/{order}/reports}', [ReportController::class ,'edit'])
+Route::get('/report/edit/{report}', [ReportController::class ,'edit'])
         ->middleware(['auth:user'])
         ->name('reports.edit');
-Route::patch('/order/{order}/reports}', [ReportController::class ,'update'])
+Route::patch('/report/edit/{report}', [ReportController::class ,'update'])
         ->middleware(['auth:user'])
         ->name('reports.update');

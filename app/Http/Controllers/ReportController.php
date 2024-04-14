@@ -114,15 +114,28 @@ class ReportController extends Controller
      */
     public function edit(Report $report)
     {
-        //
+        $report->load('order.task');
+        return Inertia::render('Reports/Edit', [
+            'report' => $report,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
+     * 
      */
+
     public function update(UpdateReportRequest $request, Report $report)
     {
-        //
+        $report->memo = $request->memo;
+        if($request->hasFile('image')) {
+            Storage::disk('s3')->delete($report->reportphpto_url); // 画像削除
+          $report->image = $request->file('image')->store(
+                'reports/'.$request->user()->id, 's3'
+                );
+        $report->save();
+        return to_route('user.dashboard');
+  }
     }
 
     /**
