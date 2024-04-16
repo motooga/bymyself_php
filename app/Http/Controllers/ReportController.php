@@ -127,15 +127,52 @@ class ReportController extends Controller
 
     public function update(UpdateReportRequest $request, Report $report)
     {
-        $report->memo = $request->memo;
+        
+        
+        if (!$request -> image) {
+            $report->memo = $request->memo;
+            $report->save();
+            return Inertia::render('Reports/Index');
+        }
+        else{
+            Storage::disk('s3')->delete($report-> reportphpto_url);
+            
+            $path = $request->file('image')->store(
+            'reports/'.$request->user()->id, 's3'
+            );
+            $reportphoto_url = Storage::disk('s3')->url($path);
+
+             if (!$path) {
+              return back()->withErrors(['error' => 'ファイルの保存に失敗しました。']);
+             }
+
+
+
+         $report -> memo = $request -> memo;
+         $report -> reportphoto_url = $reportphoto_url;
+
+    
+         $report->save();
+         return Inertia::render('Reports/Index');
+    }
+
+        
+
         if($request->hasFile('image')) {
-            Storage::disk('s3')->delete($report->reportphpto_url); // 画像削除
-          $report->image = $request->file('image')->store(
+            Storage::disk('s3')->delete($report-> reportphpto_url); // 画像削除
+          $report-> reportphoto_url = $request->file('image')->store(
                 'reports/'.$request->user()->id, 's3'
                 );
         $report->save();
         return to_route('user.dashboard');
   }
+        $report->save();
+        return to_route('user.dashboard')
+        ->with([
+                'message' => '更新しました',
+                'status' => 'success'
+        ]);
+
     }
 
     /**
