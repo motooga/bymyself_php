@@ -60,37 +60,34 @@ class ReportController extends Controller
     {
         $is_done = 1;
         $user_id = Auth::user()->id;
-
         $memo = $request->input('memo');
-        if (!$request -> image) {
+
+        if (!$request -> file('image')) {
             Report::create([
                 'order_id' => $orderId,
                 'user_id' => $user_id,
                 'memo' => $memo,
                 'is_done' => $is_done,
             ]);
-           
         }
-        else{$path = $request->file('image')->store(
-                'reports/'.$request->user()->id, 's3'
-                );
+        else{
+            $image = $request ->file('image');
+            $path = $image->store('reports','s3');
+            
 
-        if (!$path) {
+            if (!$path) {
+                return back()->withErrors(['error' => 'ファイルの保存に失敗しました。']);
+            }
+    
+            $report = new Report([
+             'order_id' => $orderId,
+             'user_id' => $user_id,
+             'memo' => $memo,
+              'is_done' => $is_done,
+              'reportphoto_url' => $path
+            ]);
 
-            return back()->withErrors(['error' => 'ファイルの保存に失敗しました。']);
-        }
-        $reportphoto_url = Storage::disk('s3')->url($path);
-
-        $report = new Report([
-            'order_id' => $orderId,
-            'user_id' => $user_id,
-            'memo' => $memo,
-            'is_done' => $is_done,
-            'reportphoto_url' => $reportphoto_url
-        ]);
-
-        
-        $report->save();
+            $report->save();
         }
     
         return to_route('user.dashboard');
@@ -127,53 +124,27 @@ class ReportController extends Controller
 
     public function update(UpdateReportRequest $request, Report $report)
     {
-        
-        
-        if (!$request -> image) {
-            $report->memo = $request->memo;
-            $report->save();
-            return Inertia::render('Reports/Index');
-        }
-        else{
-            Storage::disk('s3')->delete($report-> reportphpto_url);
+        if ($request->hasFile('image')) {
+            // もし画像がアップロードされている場合
+            Storage::disk('s3')->delete($report->reportphoto_url); // 古い画像を削除
+            $image = $request ->file('image');
+            $path = $image->store('reports','s3'); // 新しい画像を保存
+           
+
+            $report-> memo = $request->memo;
+            $report->reportphoto_url = $path; // レポートの画像URLを更新
             
-            $path = $request->file('image')->store(
-            'reports/'.$request->user()->id, 's3'
-            );
-            $reportphoto_url = Storage::disk('s3')->url($path);
-
-             if (!$path) {
-              return back()->withErrors(['error' => 'ファイルの保存に失敗しました。']);
-             }
-
-
-
-         $report -> memo = $request -> memo;
-         $report -> reportphoto_url = $reportphoto_url;
-
-    
-         $report->save();
-         return Inertia::render('Reports/Index');
-    }
-
+            $report->save(); // レポートを保存
+        } else {
+            // 画像がアップロードされていない場合
+            $report-> memo = $request->memo; // メモのみ更新
+            $report->save(); // レポートを保存
+        }
         
-
-        if($request->hasFile('image')) {
-            Storage::disk('s3')->delete($report-> reportphpto_url); // 画像削除
-          $report-> reportphoto_url = $request->file('image')->store(
-                'reports/'.$request->user()->id, 's3'
-                );
-        $report->save();
         return to_route('user.dashboard');
-  }
-        $report->save();
-        return to_route('user.dashboard')
-        ->with([
-                'message' => '更新しました',
-                'status' => 'success'
-        ]);
 
     }
+
 
     /**
      * Remove the specified resource from storage.
