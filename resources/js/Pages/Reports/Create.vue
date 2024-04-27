@@ -3,7 +3,7 @@ import UserAuthenticatedLayout from '@/Layouts/UserAuthenticatedLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import { router , Head } from '@inertiajs/vue3';
 import { reactive } from 'vue'
-import axios from 'axios';
+
 
 const props = defineProps({
   errors: Object,

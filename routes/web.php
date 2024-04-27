@@ -78,3 +78,4 @@ Route::get('/report/edit/{report}', [ReportController::class ,'edit'])
 Route::patch('/report/edit/{report}', [ReportController::class ,'update'])
         ->middleware(['auth:user'])
         ->name('reports.update');
+        

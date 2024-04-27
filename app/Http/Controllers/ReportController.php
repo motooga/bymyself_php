@@ -151,6 +151,12 @@ class ReportController extends Controller
      */
     public function destroy(Report $report)
     {
-        //
+        if (!empty($report->reportphoto_url)) {
+            // もし画像がアップロードされている場合
+            Storage::disk('s3')->delete($report->reportphoto_url); // 古い画像を削除
+        }
+            $report->delete();
+            return to_route('user.dashboard');
+    
     }
 }
