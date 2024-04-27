@@ -11,7 +11,7 @@ class StoreReportRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'order_id' => ['required', 'max:50'],
+            'memo' => ['max:50'],
+            'is_done' => ['required'],
+            'repotophoto_url' => [''],
         ];
     }
 }

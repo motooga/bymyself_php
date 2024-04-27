@@ -16,18 +16,21 @@ class ReportSeeder extends Seeder
         DB::table('reports')->insert([
             [
               'order_id' => 1,
+              'user_id' => 1,
               'is_done' => 0,
               'reportphoto_url' => null,
               'memo' => 'おわったよー',
             ],
             [
                 'order_id' => 2,
+                'user_id' => 1,
                 'is_done' => 0,
                 'reportphoto_url' => null,
                 'memo' => 'できました',
               ],
               [
                 'order_id' => 3,
+                'user_id' => 2,
                 'is_done' => 0,
                 'reportphoto_url' => null,
                 'memo' => '',

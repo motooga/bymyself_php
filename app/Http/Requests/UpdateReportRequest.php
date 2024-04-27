@@ -11,7 +11,7 @@ class UpdateReportRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class UpdateReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'memo' => ['required','max:255'],
+            'reportphoto_url' => ['max:10240','mimes:jpeg,gif,png']
         ];
     }
 }
