@@ -29,7 +29,6 @@ class ReportController extends Controller
         ->with(['order.task'])
         ->get();
 
-      
         return Inertia::render('Reports/Index' ,[
          'reports' => $reports
         ]);
@@ -132,12 +131,14 @@ class ReportController extends Controller
            
 
             $report-> memo = $request->memo;
+            $report-> is_done = 1;
             $report->reportphoto_url = $path; // レポートの画像URLを更新
             
             $report->save(); // レポートを保存
         } else {
             // 画像がアップロードされていない場合
-            $report-> memo = $request->memo; // メモのみ更新
+            $report-> memo = $request->memo; 
+            $report-> is_done = 1;// メモのみ更新
             $report->save(); // レポートを保存
         }
         

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\Report;
 use App\Models\Family;
 use Inertia\Inertia;
 
@@ -18,10 +19,17 @@ class OrderController extends Controller
      */
     public function index()
     {
-        // $orders = Order::select('id' , 'task_name' , 'category' , 'type')
-        // ->get();
-        
-        return Inertia::render('Orders/Index');
+        $family = Auth::user();
+        $users = User::where('family_id', $family->id)->get();
+        $userIds = $users->pluck('id')->all();
+
+        $reports = Report::whereIn('user_id', $userIds)
+        ->with(['order.task','user']) 
+        ->get();
+
+         return Inertia::render('Orders/Index', [
+        'reports' => $reports
+    ]);
 
     }
 

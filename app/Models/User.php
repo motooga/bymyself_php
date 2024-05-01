@@ -21,6 +21,9 @@ class User extends Authenticatable
     public function oders() {
         return $this->hasMany(Order::class);
     }
+    public function points() {
+        return $this->hasMany(Point::class );
+    }
     /*** The attributes that are mass assignable.
      *
      * @var array<int, string>

@@ -6,6 +6,8 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PointController;
+use App\Http\Controllers\PointEventController;
 use App\Http\Controllers\User\Auth\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/index', [ManageUserController::class, 'index'])->name('index');
     Route::get('/show/{user}', [ManageUserController::class, 'show'])->name('show');
+    Route::get('/family/report/{report}', [ManageUserController::class, 'FamilyReportShow'])->name('FamilyReportShow');
+    Route::post('/family/report/{report}', [PointEventController::class, 'store'])->name('point_event.store');
+    Route::patch('/family/report/{report}', [ManageUserController::class ,'update'])->name('report.allow');
+    Route::post('/family/report/{report}/point', [PointController::class, 'store'])->name('point.store');
 });
 
 
@@ -51,7 +57,6 @@ Route::prefix('user')->name('user.')->group(function(){
       Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
       Route::patch('/profile', [UserProfileController::class, 'update'])->name('profile.update');
       Route::delete('/profile', [UserProfileController::class, 'destroy'])->name('profile.destroy');
-
     });
 
     require __DIR__.'/user.php';
@@ -78,4 +83,3 @@ Route::get('/report/edit/{report}', [ReportController::class ,'edit'])
 Route::patch('/report/edit/{report}', [ReportController::class ,'update'])
         ->middleware(['auth:user'])
         ->name('reports.update');
-        
