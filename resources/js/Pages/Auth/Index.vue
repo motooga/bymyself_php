@@ -31,7 +31,7 @@ defineProps({
                                   <table class="table-auto w-full text-left whitespace-no-wrap">
                                       <thead>
                                       <tr>
-                                          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">登録番号</th>
+                                          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">No.</th>
                                           <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">ニックネーム</th>
                                       </tr>
                                       </thead>
