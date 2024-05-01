@@ -48,8 +48,8 @@
 | ファミリーユーザーログイン機能の実装 | 10h25m |
 | 子ユーザー管理機能実装 | 37h |
 | タスク依頼機能実装 |  16h |
-| タスク報告機能実装 |  h |
-| ランキング機能実装 |  h |
+| タスク報告機能実装 |  15h |
+| ランキング機能実装 |  -h |
 
 
 # 機能一覧
@@ -62,16 +62,14 @@
 - 子ども詳細機能
 - タスク一覧機能
 - タスク詳細機能
-- タスク履歴機能
+
 
 ## 子ユーザー
 - 子ユーザーログイン機能（ログインID、パスワード情報のみでログイン可能）
 - タスク一覧機能
 - タスク報告機能（画像投稿機能）
-- タスク履歴機能
 - タスク詳細機能
-- ポイント履歴機能
-- ランキング機能
+
 
 # 実装中に問題となったこと・工夫したところ
 ## 問題点1：開発環境の構築
@@ -97,17 +95,21 @@
 ## タスク依頼機能実装時の問題
 1. createメソッド後のredirectのかえり先に選択したuserのshowページにリダイレクトさせたかったので、userの情報をredirectの情報に含める方法に苦労した。```return to_route('user.show',['user'=> $request -> user_id ])```とすることで、ルートに必要なパラメーターを含めることが分かった。
 
+## 工夫した部分
+1. 承認作業を簡単にするため、ボタンクリックで承認とポイント付与が同時完了するようにした。
+2. 定型の仕事を何度も依頼することを考えてtaskテーブルとorderテーブルを分けることで、依頼をスムーズにできるようにした。スケジュール機能を今後実装目標にしているので、繰り返し機能などをつけていきたい。
+
 
 # Ruby開発時からの改善点
 ## テーブル設計
+1. テーブル設計はRubyでの開発時は、1テーブルに多くのカラムを設定して情報のやり取りが簡単ではあったが、処理に負担がかかっていたため、正規化を意識してテーブル設計を行った。
+2. 正規化を意識しすぎたせいでリレーションが複雑になり少し処理の作成に苦戦した。1クリックで複数テーブルに変更を加える処理を実行するのはVueを使用したおかげでスムーズに実装できたと思う。
 
 # テスト内容
-- 単体テスト
-- 
+- 単体テスト：
+ローカルでの自分での確認とユーザー認証機能の単体テストのみを実行した。
 
-# 実装した機能についての画像やGIFおよびその説明
 
-鋭意作成中
 
 # 今後の実装予定の機能
 - ポイント利用でのミニゲーム機能
@@ -122,7 +124,7 @@
 
 # データベース設計
 
-[![Image from Gyazo](https://i.gyazo.com/53a31881a6ee8d944fe3706fce61fd8d.png)](https://gyazo.com/53a31881a6ee8d944fe3706fce61fd8d)
+[![Image from Gyazo](https://i.gyazo.com/b7330176ebc1c26bd11ce38acb63e736.jpg)](https://gyazo.com/b7330176ebc1c26bd11ce38acb63e736)
 
 # 画面遷移図
 
@@ -142,7 +144,22 @@ https://okuyan-techdiary.com/mysql-dbeaver-error
 - ログイン機能の実装
 1. Breeze公式リファレンス
 https://laravel.com/docs/8.x/starter-kits#laravel-breeze
-2. 
+2. https://newsite-make.com/relation-admin-management/ 
+3. https://inertiajs.com/shared-data
+
+- 画像投稿参考
+1. https://reffect.co.jp/vue/vue-js-laravel-file-upload
+
+- Vueの参考
+1. https://logsuke.com/web/programming/laravel/laravel-breeze-top
+2. https://www.udemy.com/course/laravel-vue3-crm/learn/lecture/33334940#overview
+
+- datepicker導入参考
+ 1. https://vue3datepicker.com/props/look-and-feel/
+ 2. https://zenn.dev/unkler/articles/506189d3375297
+
+
+
 
 
 
