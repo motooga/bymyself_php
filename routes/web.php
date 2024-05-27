@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/family/report/{report}', [PointEventController::class, 'store'])->name('point_event.store');
     Route::patch('/family/report/{report}', [ManageUserController::class ,'update'])->name('report.allow');
     Route::post('/family/report/{report}/point', [PointController::class, 'store'])->name('point.store');
+    Route::post('/points/increase', [PointController::class, 'increasePoints'])->name('points.increase');
+    Route::post('/points/decrease', [PointController::class, 'decreasePoints'])->name('points.decrease');
+    Route::get('/points/{userId}', [PointController::class, 'getPoints'])->name('points.get');
 });
 
 
@@ -83,3 +86,6 @@ Route::get('/report/edit/{report}', [ReportController::class ,'edit'])
 Route::patch('/report/edit/{report}', [ReportController::class ,'update'])
         ->middleware(['auth:user'])
         ->name('reports.update');
+Route::get('/point/index', [PointController::class, 'index'])
+        ->middleware(['auth:user'])
+        ->name('point.index');

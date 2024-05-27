@@ -11,6 +11,8 @@ import { Link , usePage } from '@inertiajs/vue3';
 const user = usePage().props.auth.user;
 
 
+
+
 const showingNavigationDropdown = ref(false);
 
 </script>
@@ -41,6 +43,10 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('reports.index')" :active="route().current('reports.index')">
                                     ほうこく管理
                                 </NavLink>
+
+                                <NavLink :href="route('point.index')" :active="route().current('point.index')">
+                                    ぽいんと履歴
+                                </NavLink>
                             </div>
                         </div>
 
@@ -55,6 +61,7 @@ const showingNavigationDropdown = ref(false);
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {{ user.nickname }}
+                                               
 
                                                 <svg
                                                     class="ms-2 -me-0.5 h-4 w-4"
@@ -132,7 +139,7 @@ const showingNavigationDropdown = ref(false);
                             <div class="font-medium text-base text-gray-800">
                                 {{ user.name }}
                             </div>
-                            <div class="font-medium text-sm text-gray-500">{{ user.email }}</div>
+                            
                         </div>
 
                         <div class="mt-3 space-y-1">

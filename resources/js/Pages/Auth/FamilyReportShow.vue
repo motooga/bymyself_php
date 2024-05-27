@@ -32,11 +32,11 @@ const approveReport = async (reportId) => {
       report_id: data.id
     };
     
-    await router.post(route('point_event.store', { report: reportId }), pointEvent);
+    await router.post(route('points.increase', { report: reportId }), pointEvent);
 
     // 3. 処理が完了した後にリロードなどのアクションを実行する
 
-    await router.post(route('point.store', { report: reportId }), pointEvent);
+    // await router.post(route('point.store', { report: reportId }), pointEvent);
 
   } catch (error) {
     console.error('エラー:', error);
